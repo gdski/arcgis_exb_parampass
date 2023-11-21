@@ -4,35 +4,38 @@
     <title>URL Parameter Example</title>
 </head>
 <body>
-    <h1>Accessing URL Parameter</h1>
+    <h1>Accessing URL Parameter from Parent</h1>
     
     <!-- Add a button to trigger the display of the parameter -->
-    <button id="displayParamButton">Display data_id Parameter</button>
+    <button id="displayParamButton">Display data_id Parameter from Parent</button>
     
     <p id="parameterValue"></p>
 
     <script>
-        // Function to display the parameter value
-        function displayParamValue() {
-            // Parse the URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
+        // Function to display the parameter value from the parent URL
+        function displayParamValueFromParent() {
+            // Access the parent window's URL
+            const parentURL = window.parent.location.href;
+
+            // Parse the URL parameters from the parent
+            const urlParams = new URLSearchParams(parentURL.split('?')[1]); // Extract parameters after '?'
 
             // Access the 'data_id' parameter
             const dataId = urlParams.get('data_id');
 
             // Display the parameter value
             if (dataId) {
-                document.getElementById('parameterValue').textContent = `data_id: ${dataId}`;
+                document.getElementById('parameterValue').textContent = `data_id from Parent: ${dataId}`;
             } else {
-                document.getElementById('parameterValue').textContent = 'No data_id parameter found in the URL.';
+                document.getElementById('parameterValue').textContent = 'No data_id parameter found in the Parent URL.';
             }
         }
 
         // Add a click event listener to the button
-        document.getElementById('displayParamButton').addEventListener('click', displayParamValue);
+        document.getElementById('displayParamButton').addEventListener('click', displayParamValueFromParent);
 
-        // Call the function initially to check the URL
-        displayParamValue();
+        // Call the function initially to check the Parent URL
+        displayParamValueFromParent();
     </script>
 </body>
 </html>
