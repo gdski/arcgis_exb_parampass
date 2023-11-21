@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Parameter Example</title>
+</head>
+<body>
+    <h1>Accessing URL Parameter</h1>
+    
+    <!-- Add a button to trigger the display of the parameter -->
+    <button id="displayParamButton">Display data_id Parameter</button>
+    
+    <p id="parameterValue"></p>
+
+    <script>
+        // Function to display the parameter value
+        function displayParamValue() {
+            // Parse the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Access the 'data_id' parameter
+            const dataId = urlParams.get('data_id');
+
+            // Display the parameter value
+            if (dataId) {
+                document.getElementById('parameterValue').textContent = `data_id: ${dataId}`;
+            } else {
+                document.getElementById('parameterValue').textContent = 'No data_id parameter found in the URL.';
+            }
+        }
+
+        // Add a click event listener to the button
+        document.getElementById('displayParamButton').addEventListener('click', displayParamValue);
+
+        // Call the function initially to check the URL
+        displayParamValue();
+    </script>
+</body>
+</html>
